@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bella Vista Restaurant - Fine Dining Experience</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <h2>Bella Vista</h2>
+            </div>
+            <div class="nav-menu">
+                <a href="#home" class="nav-link">Home</a>
+                <a href="#menu" class="nav-link">Menu</a>
+                <a href="#about" class="nav-link">About</a>
+                <a href="#reservations" class="nav-link">Reservations</a>
+                <a href="#contact" class="nav-link">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>Fine Dining Experience</h1>
+            <p>Indulge in culinary excellence with our carefully crafted menu and elegant atmosphere</p>
+            <a href="#reservations" class="cta-button">Make a Reservation</a>
+        </div>
+    </section>
+
+    <!-- Menu Section -->
+    <section id="menu" class="menu-section">
+        <div class="container">
+            <h2>Our Menu</h2>
+            <div class="menu-categories">
+                <div class="menu-category">
+                    <h3>Appetizers</h3>
+                    <div class="menu-item">
+                        <h4>Bruschetta Classica</h4>
+                        <p>Fresh tomatoes, basil, and mozzarella on toasted bread</p>
+                        <span class="price">$12</span>
+                    </div>
+                    <div class="menu-item">
+                        <h4>Calamari Fritti</h4>
+                        <p>Crispy fried squid with marinara sauce</p>
+                        <span class="price">$16</span>
+                    </div>
+                </div>
+                <div class="menu-category">
+                    <h3>Main Courses</h3>
+                    <div class="menu-item">
+                        <h4>Osso Buco</h4>
+                        <p>Braised veal shanks with risotto milanese</p>
+                        <span class="price">$32</span>
+                    </div>
+                    <div class="menu-item">
+                        <h4>Salmon al Limone</h4>
+                        <p>Pan-seared salmon with lemon butter sauce</p>
+                        <span class="price">$28</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Reservations Section -->
+    <section id="reservations" class="reservations-section">
+        <div class="container">
+            <h2>Make a Reservation</h2>
+            <form class="reservation-form">
+                <div class="form-row">
+                    <input type="text" name="name" placeholder="Full Name" required>
+                    <input type="email" name="email" placeholder="Email" required>
+                </div>
+                <div class="form-row">
+                    <input type="tel" name="phone" placeholder="Phone Number" required>
+                    <select name="guests" required>
+                        <option value="">Number of Guests</option>
+                        <option value="1">1 Guest</option>
+                        <option value="2">2 Guests</option>
+                        <option value="3">3 Guests</option>
+                        <option value="4">4 Guests</option>
+                        <option value="5+">5+ Guests</option>
+                    </select>
+                </div>
+                <div class="form-row">
+                    <input type="date" name="date" required>
+                    <select name="time" required>
+                        <option value="">Preferred Time</option>
+                        <option value="18:00">6:00 PM</option>
+                        <option value="18:30">6:30 PM</option>
+                        <option value="19:00">7:00 PM</option>
+                        <option value="19:30">7:30 PM</option>
+                        <option value="20:00">8:00 PM</option>
+                        <option value="20:30">8:30 PM</option>
+                        <option value="21:00">9:00 PM</option>
+                    </select>
+                </div>
+                <textarea name="special-requests" placeholder="Special requests or dietary restrictions"></textarea>
+                <button type="submit" class="cta-button">Reserve Table</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact-section">
+        <div class="container">
+            <h2>Contact Us</h2>
+            <div class="contact-info">
+                <div class="contact-item">
+                    <h4>Address</h4>
+                    <p>123 Main Street<br>Downtown, City 12345</p>
+                </div>
+                <div class="contact-item">
+                    <h4>Phone</h4>
+                    <p>(555) 123-4567</p>
+                </div>
+                <div class="contact-item">
+                    <h4>Hours</h4>
+                    <p>Mon-Thu: 5:00 PM - 10:00 PM<br>Fri-Sat: 5:00 PM - 11:00 PM<br>Sun: 4:00 PM - 9:00 PM</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Bella Vista Restaurant. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
