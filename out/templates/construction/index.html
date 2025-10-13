@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bee Construction - Professional Epoxy Flooring, Painting & Finishing Services | Pretoria</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Bee Construction offers professional epoxy flooring, painting, rhinolite, and béton ciré services in Pretoria. Free quotes, expert craftsmanship, 15+ years experience. Call +27 123 456 789">
+    <meta name="keywords" content="epoxy flooring, painting services, rhinolite, béton ciré, construction, Pretoria, Gauteng, South Africa, professional painting, floor finishing">
+    <meta name="author" content="Bee Construction">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Bee Construction - Professional Construction & Finishing Services">
+    <meta property="og:description" content="Building with Precision. Finishing with Perfection. Expert epoxy flooring, painting, and finishing services in Pretoria.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://beeconstruction.co.za">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1581094794329-c8112a89af12?w=1200&h=630&fit=crop">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Bee Construction - Professional Construction Services">
+    <meta name="twitter:description" content="Expert epoxy flooring, painting, and finishing services in Pretoria. Free quotes available.">
+    <meta name="twitter:image" content="https://images.unsplash.com/photo-1581094794329-c8112a89af12?w=1200&h=630&fit=crop">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "LocalBusiness",
+        "name": "Bee Construction",
+        "description": "Professional construction and finishing services including epoxy flooring, painting, rhinolite, and béton ciré",
+        "url": "https://beeconstruction.co.za",
+        "telephone": "+27123456789",
+        "email": "info@beeconstruction.co.za",
+        "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Pretoria",
+            "addressRegion": "Gauteng",
+            "addressCountry": "South Africa"
+        },
+        "openingHours": "Mo-Sa 08:00-17:00",
+        "priceRange": "R50-R800",
+        "serviceArea": {
+            "@type": "GeoCircle",
+            "geoMidpoint": {
+                "@type": "GeoCoordinates",
+                "latitude": -25.7479,
+                "longitude": 28.2293
+            },
+            "geoRadius": "50000"
+        }
+    }
+    </script>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <h3>Bee Construction</h3>
+            </div>
+            <div class="nav-menu" id="nav-menu">
+                <a href="#hero" class="nav-link">Home</a>
+                <a href="#about" class="nav-link">About</a>
+                <a href="#services" class="nav-link">Services</a>
+                <a href="#gallery" class="nav-link">Gallery</a>
+                <a href="#testimonials" class="nav-link">Reviews</a>
+                <a href="#contact" class="nav-link">Contact</a>
+                <a href="#booking" class="nav-link cta-nav">Book Now</a>
+            </div>
+            <div class="hamburger" id="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Live Chat Widget -->
+    <div class="chat-widget" id="chatWidget">
+        <div class="chat-button" id="chatButton">
+            <span>💬</span>
+        </div>
+        <div class="chat-popup" id="chatPopup">
+            <div class="chat-header">
+                <h4>Need Help?</h4>
+                <span class="chat-close" id="chatClose">×</span>
+            </div>
+            <div class="chat-content">
+                <p>Hi! How can we help you today?</p>
+                <div class="chat-options">
+                    <button class="chat-option" onclick="openWhatsApp()">WhatsApp</button>
+                    <button class="chat-option" onclick="openPhone()">Call Now</button>
+                    <button class="chat-option" onclick="scrollToContact()">Get Quote</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <header id="hero" class="parallax-section">
+        <div class="hero-overlay">
+            <div class="hero-content">
+                <h1 class="hero-title">Bee Construction</h1>
+                <p class="hero-subtitle">Building with Precision. Finishing with Perfection.</p>
+                <div class="hero-buttons">
+                    <a href="#contact" class="cta-button primary">Get a Free Quote</a>
+                    <a href="#booking" class="cta-button secondary">Book Consultation</a>
+                </div>
+                <div class="hero-stats">
+                    <div class="stat">
+                        <span class="stat-number">500+</span>
+                        <span class="stat-label">Projects Completed</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">15+</span>
+                        <span class="stat-label">Years Experience</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">100%</span>
+                        <span class="stat-label">Satisfaction Rate</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Online Booking Section -->
+    <section id="booking" class="booking-section">
+        <div class="container">
+            <h2>Book Your Free Consultation</h2>
+            <div class="booking-content">
+                <div class="booking-form">
+                    <form id="bookingForm">
+                        <div class="form-row">
+                            <input type="text" name="name" placeholder="Full Name" required>
+                            <input type="email" name="email" placeholder="Email Address" required>
+                        </div>
+                        <div class="form-row">
+                            <input type="tel" name="phone" placeholder="Phone Number" required>
+                            <select name="service" required>
+                                <option value="">Select Service</option>
+                                <option value="epoxy">Epoxy Flooring</option>
+                                <option value="painting">Painting</option>
+                                <option value="rhinolite">Rhinolite</option>
+                                <option value="beton">Béton Ciré</option>
+                                <option value="consultation">General Consultation</option>
+                            </select>
+                        </div>
+                        <div class="form-row">
+                            <input type="date" name="preferred-date" required>
+                            <select name="time-slot" required>
+                                <option value="">Preferred Time</option>
+                                <option value="morning">Morning (8am-12pm)</option>
+                                <option value="afternoon">Afternoon (12pm-4pm)</option>
+                                <option value="evening">Evening (4pm-6pm)</option>
+                            </select>
+                        </div>
+                        <textarea name="message" placeholder="Tell us about your project..." rows="4"></textarea>
+                        <button type="submit" class="cta-button">Book Free Consultation</button>
+                    </form>
+                </div>
+                <div class="booking-benefits">
+                    <h3>Why Book With Us?</h3>
+                    <ul>
+                        <li>✅ Free on-site consultation</li>
+                        <li>✅ Detailed project estimate</li>
+                        <li>✅ No obligation quote</li>
+                        <li>✅ Expert advice included</li>
+                        <li>✅ Flexible scheduling</li>
+                    </ul>
+                    <div class="booking-contact">
+                        <p><strong>Need immediate assistance?</strong></p>
+                        <a href="tel:+27123456789" class="phone-link">📞 +27 123 456 789</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="parallax-section">
+        <div class="container">
+            <div class="about-content">
+                <div class="about-text">
+                    <h2>About Us</h2>
+                    <p>Bee Construction is a premier construction and finishing company specializing in high-quality epoxy floors, painting, rhinolite, and béton ciré. With years of experience, we deliver exceptional results that exceed expectations.</p>
+                    <p>Why choose us? Precision craftsmanship, reliable service, and a commitment to perfection in every project.</p>
+                </div>
+                <div class="about-slideshow">
+                    <!-- Placeholder for slideshow -->
+                    <img src="https://via.placeholder.com/400x300?text=Epoxy+Floor" alt="Epoxy Floor">
+                    <img src="https://via.placeholder.com/400x300?text=Painted+Wall" alt="Painted Wall">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="services">
+        <div class="container">
+            <h2>Our Services</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">🏗️</div>
+                    <h3>Epoxy Flooring</h3>
+                    <p>Durable, glossy finishes for industrial & home use. Perfect for garages, workshops, and modern living spaces.</p>
+                    <div class="service-price">R300 – R500/m²</div>
+                    <ul class="service-features">
+                        <li>High durability</li>
+                        <li>Easy maintenance</li>
+                        <li>Multiple color options</li>
+                        <li>5-year warranty</li>
+                    </ul>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">🎨</div>
+                    <h3>Professional Painting</h3>
+                    <p>Interior & exterior professional painting services with premium quality paints and expert application.</p>
+                    <div class="service-price">R50 – R120/m²</div>
+                    <ul class="service-features">
+                        <li>Premium paints</li>
+                        <li>Expert preparation</li>
+                        <li>Clean finish</li>
+                        <li>2-year warranty</li>
+                    </ul>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">🧱</div>
+                    <h3>Rhinolite Finishing</h3>
+                    <p>Smooth wall finishing solution that's easy to maintain and provides a modern, clean appearance.</p>
+                    <div class="service-price">R70 – R150/m²</div>
+                    <ul class="service-features">
+                        <li>Smooth finish</li>
+                        <li>Easy maintenance</li>
+                        <li>Moisture resistant</li>
+                        <li>3-year warranty</li>
+                    </ul>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">✨</div>
+                    <h3>Béton Ciré</h3>
+                    <p>Stylish, modern polished cement finish that creates stunning contemporary interiors.</p>
+                    <div class="service-price">R400 – R800/m²</div>
+                    <ul class="service-features">
+                        <li>Modern aesthetic</li>
+                        <li>Highly durable</li>
+                        <li>Custom colors</li>
+                        <li>10-year warranty</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Price Calculator Section -->
+    <section id="calculator" class="calculator-section">
+        <div class="container">
+            <h2>Get an Instant Quote</h2>
+            <div class="calculator-content">
+                <div class="calculator-form">
+                    <form id="quoteCalculator">
+                        <div class="form-group">
+                            <label for="serviceType">Service Type</label>
+                            <select id="serviceType" name="service" required>
+                                <option value="">Select a service</option>
+                                <option value="epoxy" data-min="300" data-max="500">Epoxy Flooring</option>
+                                <option value="painting" data-min="50" data-max="120">Painting</option>
+                                <option value="rhinolite" data-min="70" data-max="150">Rhinolite</option>
+                                <option value="beton" data-min="400" data-max="800">Béton Ciré</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="area">Area Size (m²)</label>
+                            <input type="number" id="area" name="area" min="1" placeholder="Enter area size" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="complexity">Project Complexity</label>
+                            <select id="complexity" name="complexity">
+                                <option value="simple">Simple (Standard application)</option>
+                                <option value="medium">Medium (Some preparation needed)</option>
+                                <option value="complex">Complex (Extensive preparation)</option>
+                            </select>
+                        </div>
+                        <button type="button" onclick="calculateQuote()" class="cta-button">Calculate Quote</button>
+                    </form>
+                </div>
+                <div class="quote-result" id="quoteResult">
+                    <h3>Your Estimated Quote</h3>
+                    <div class="quote-display">
+                        <div class="quote-range">
+                            <span class="quote-min" id="quoteMin">R0</span>
+                            <span class="quote-separator">-</span>
+                            <span class="quote-max" id="quoteMax">R0</span>
+                        </div>
+                        <p class="quote-note">*Final quote may vary based on site conditions and specific requirements</p>
+                        <a href="#contact" class="cta-button">Get Detailed Quote</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="gallery">
+        <div class="container">
+            <h2>Project Gallery</h2>
+            <div class="gallery-filters">
+                <button class="filter-btn active" data-filter="all">All Projects</button>
+                <button class="filter-btn" data-filter="epoxy">Epoxy Floors</button>
+                <button class="filter-btn" data-filter="painting">Painting</button>
+                <button class="filter-btn" data-filter="rhinolite">Rhinolite</button>
+                <button class="filter-btn" data-filter="beton">Béton Ciré</button>
+            </div>
+            <div class="gallery-grid">
+                <div class="gallery-item" data-category="epoxy">
+                    <img src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?w=400&h=300&fit=crop" alt="Epoxy Floor Project 1">
+                    <div class="gallery-overlay">
+                        <h4>Modern Garage Epoxy</h4>
+                        <p>High-gloss epoxy flooring for residential garage</p>
+                    </div>
+                </div>
+                <div class="gallery-item" data-category="painting">
+                    <img src="https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=400&h=300&fit=crop" alt="Interior Painting Project">
+                    <div class="gallery-overlay">
+                        <h4>Interior Renovation</h4>
+                        <p>Complete interior painting with premium finishes</p>
+                    </div>
+                </div>
+                <div class="gallery-item" data-category="rhinolite">
+                    <img src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=400&h=300&fit=crop" alt="Rhinolite Wall Finish">
+                    <div class="gallery-overlay">
+                        <h4>Smooth Wall Finish</h4>
+                        <p>Rhinolite application for modern office space</p>
+                    </div>
+                </div>
+                <div class="gallery-item" data-category="beton">
+                    <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=300&fit=crop" alt="Béton Ciré Floor">
+                    <div class="gallery-overlay">
+                        <h4>Polished Concrete</h4>
+                        <p>Béton Ciré finish for contemporary living</p>
+                    </div>
+                </div>
+                <div class="gallery-item" data-category="epoxy">
+                    <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=300&fit=crop" alt="Industrial Epoxy Floor">
+                    <div class="gallery-overlay">
+                        <h4>Industrial Epoxy</h4>
+                        <p>Heavy-duty epoxy for commercial workshop</p>
+                    </div>
+                </div>
+                <div class="gallery-item" data-category="painting">
+                    <img src="https://images.unsplash.com/photo-1560448204-603b3fc33ddc?w=400&h=300&fit=crop" alt="Exterior Painting">
+                    <div class="gallery-overlay">
+                        <h4>Exterior Makeover</h4>
+                        <p>Complete exterior painting and weatherproofing</p>
+                    </div>
+                </div>
+            </div>
+            <div class="video-section">
+                <h3>See Our Work in Action</h3>
+                <div class="video-container">
+                    <iframe width="560" height="315" src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allowfullscreen></iframe>
+                </div>
+            </div>
+            <a href="#contact" class="cta-button">Start Your Project</a>
+        </div>
+    </section>
+
+    <section id="testimonials" class="parallax-section">
+        <div class="container">
+            <h2>What Our Clients Say</h2>
+            <div class="testimonials-carousel">
+                <div class="testimonial-slides" id="testimonialSlides">
+                    <div class="testimonial-card active">
+                        <div class="testimonial-content">
+                            <p>"Bee Construction transformed our garage with epoxy flooring. The quality is outstanding and the team was professional throughout. Highly recommend!"</p>
+                            <div class="stars">⭐⭐⭐⭐⭐</div>
+                            <div class="testimonial-author">
+                                <strong>John Doe</strong>
+                                <span>Pretoria</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonial-card">
+                        <div class="testimonial-content">
+                            <p>"Excellent painting service! They painted our entire house interior and exterior. Clean, professional, and the results exceeded our expectations."</p>
+                            <div class="stars">⭐⭐⭐⭐⭐</div>
+                            <div class="testimonial-author">
+                                <strong>Sarah Johnson</strong>
+                                <span>Johannesburg</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonial-card">
+                        <div class="testimonial-content">
+                            <p>"The Rhinolite finish on our office walls looks amazing. Easy to maintain and gives a modern, professional appearance. Great work!"</p>
+                            <div class="stars">⭐⭐⭐⭐⭐</div>
+                            <div class="testimonial-author">
+                                <strong>Mike Chen</strong>
+                                <span>Cape Town</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonial-card">
+                        <div class="testimonial-content">
+                            <p>"Béton Ciré flooring in our living room is absolutely stunning. The team was knowledgeable and delivered exactly what we envisioned."</p>
+                            <div class="stars">⭐⭐⭐⭐⭐</div>
+                            <div class="testimonial-author">
+                                <strong>Lisa van der Merwe</strong>
+                                <span>Durban</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-controls">
+                    <button class="testimonial-prev" onclick="changeTestimonial(-1)">❮</button>
+                    <div class="testimonial-dots">
+                        <span class="dot active" onclick="currentTestimonial(1)"></span>
+                        <span class="dot" onclick="currentTestimonial(2)"></span>
+                        <span class="dot" onclick="currentTestimonial(3)"></span>
+                        <span class="dot" onclick="currentTestimonial(4)"></span>
+                    </div>
+                    <button class="testimonial-next" onclick="changeTestimonial(1)">❯</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Blog Section -->
+    <section id="blog" class="blog-section">
+        <div class="container">
+            <h2>Latest News & Tips</h2>
+            <div class="blog-grid">
+                <article class="blog-card">
+                    <img src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?w=400&h=250&fit=crop" alt="Epoxy Floor Maintenance">
+                    <div class="blog-content">
+                        <h3>How to Maintain Your Epoxy Floor</h3>
+                        <p>Learn the best practices for keeping your epoxy floor looking new for years to come.</p>
+                        <div class="blog-meta">
+                            <span class="blog-date">Dec 15, 2024</span>
+                            <a href="#" class="read-more">Read More</a>
+                        </div>
+                    </div>
+                </article>
+                <article class="blog-card">
+                    <img src="https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=400&h=250&fit=crop" alt="Paint Color Trends">
+                    <div class="blog-content">
+                        <h3>2025 Paint Color Trends</h3>
+                        <p>Discover the trending colors for interior and exterior painting this year.</p>
+                        <div class="blog-meta">
+                            <span class="blog-date">Dec 10, 2024</span>
+                            <a href="#" class="read-more">Read More</a>
+                        </div>
+                    </div>
+                </article>
+                <article class="blog-card">
+                    <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=250&fit=crop" alt="Béton Ciré Benefits">
+                    <div class="blog-content">
+                        <h3>Why Choose Béton Ciré?</h3>
+                        <p>Explore the benefits of this modern flooring solution for contemporary homes.</p>
+                        <div class="blog-meta">
+                            <span class="blog-date">Dec 5, 2024</span>
+                            <a href="#" class="read-more">Read More</a>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <div class="container">
+            <h2>Contact Us</h2>
+            <div class="contact-content">
+                <div class="contact-form">
+                    <form id="contactForm" action="#" method="post">
+                        <div class="form-row">
+                            <input type="text" name="name" placeholder="Your Name" required>
+                            <input type="email" name="email" placeholder="Your Email" required>
+                        </div>
+                        <div class="form-row">
+                            <input type="tel" name="phone" placeholder="Your Phone" required>
+                            <select name="service" required>
+                                <option value="">Select Service</option>
+                                <option value="epoxy">Epoxy Flooring</option>
+                                <option value="painting">Painting</option>
+                                <option value="rhinolite">Rhinolite</option>
+                                <option value="beton">Béton Ciré</option>
+                                <option value="general">General Inquiry</option>
+                            </select>
+                        </div>
+                        <textarea name="message" placeholder="Tell us about your project..." required></textarea>
+                        <button type="submit" class="cta-button">Send Message</button>
+                    </form>
+                </div>
+                <div class="contact-details">
+                    <div class="contact-info">
+                        <div class="contact-item">
+                            <div class="contact-icon">📞</div>
+                            <div class="contact-text">
+                                <h4>Phone</h4>
+                                <a href="tel:+27123456789">+27 123 456 789</a>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon">📧</div>
+                            <div class="contact-text">
+                                <h4>Email</h4>
+                                <a href="mailto:info@beeconstruction.co.za">info@beeconstruction.co.za</a>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon">🏢</div>
+                            <div class="contact-text">
+                                <h4>Office</h4>
+                                <p>Pretoria, Gauteng, South Africa</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon">🕒</div>
+                            <div class="contact-text">
+                                <h4>Business Hours</h4>
+                                <p>Mon–Sat: 8am – 5pm<br>Sunday: Closed</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="map-container">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3588.5!2d28.2!3d-25.7!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjXCsDQyJzAwLjAiUyAyOMKwMTInMDAuMCJF!5e0!3m2!1sen!2sza!4v1234567890123!5m2!1sen!2sza" width="100%" height="300" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                    </div>
+                </div>
+            </div>
+            <div class="contact-cta">
+                <p class="cta-text">Ready to transform your space? Let's discuss your project today!</p>
+                <div class="contact-buttons">
+                    <a href="tel:+27123456789" class="cta-button primary">Call Now</a>
+                    <a href="https://wa.me/27123456789" class="cta-button secondary">WhatsApp</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Bee Construction</h4>
+                    <p>Building with Precision. Finishing with Perfection.</p>
+                    <div class="social-media">
+                        <a href="https://wa.me/27123456789" target="_blank" rel="noopener">WhatsApp</a>
+                        <a href="#" target="_blank" rel="noopener">Facebook</a>
+                        <a href="#" target="_blank" rel="noopener">Instagram</a>
+                        <a href="#" target="_blank" rel="noopener">Tik Tok</a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Services</h4>
+                    <ul>
+                        <li><a href="#services">Epoxy Flooring</a></li>
+                        <li><a href="#services">Professional Painting</a></li>
+                        <li><a href="#services">Rhinolite Finishing</a></li>
+                        <li><a href="#services">Béton Ciré</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#hero">Home</a></li>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#gallery">Gallery</a></li>
+                        <li><a href="#blog">Blog</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact Info</h4>
+                    <p>📞 +27 123 456 789</p>
+                    <p>📧 info@beeconstruction.co.za</p>
+                    <p>🏢 Pretoria, Gauteng</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Bee Construction. All Rights Reserved.</p>
+                <div class="footer-legal">
+                    <a href="#privacy">Privacy Policy</a>
+                    <a href="#terms">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
