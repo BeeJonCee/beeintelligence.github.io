@@ -160,11 +160,27 @@ export default function TemplateGallery() {
   ];
 
   useEffect(() => {
-    // Simulate API call
-    setTimeout(() => {
-      setTemplates(mockTemplates);
-      setLoading(false);
-    }, 1000);
+    // Fetch templates from API
+    const fetchTemplates = async () => {
+      try {
+        const response = await fetch('http://localhost:3001/api/templates');
+        if (response.ok) {
+          const data = await response.json();
+          setTemplates(data.templates);
+        } else {
+          // Fallback to mock data
+          setTemplates(mockTemplates);
+        }
+      } catch (error) {
+        console.error('Error fetching templates:', error);
+        // Fallback to mock data
+        setTemplates(mockTemplates);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchTemplates();
   }, []);
 
   const filteredTemplates = templates.filter(template => {
@@ -295,10 +311,14 @@ export default function TemplateGallery() {
                   )}
                 </div>
 
-                {/* Stats */}
+                {/* Template Info */}
                 <div className="flex items-center justify-between text-sm text-text-muted mb-4">
-                  <span>👁️ {template.viewCount.toLocaleString()} views</span>
-                  <span>⬇️ {template.downloadCount} downloads</span>
+                  <span className="px-2 py-1 bg-accent-grey rounded-full text-xs">
+                    {template.category}
+                  </span>
+                  <span className="px-2 py-1 bg-accent-grey rounded-full text-xs">
+                    {template.industry}
+                  </span>
                 </div>
 
                 {/* Actions */}
@@ -310,10 +330,10 @@ export default function TemplateGallery() {
                     Preview
                   </Link>
                   <Link
-                    href={`/templates/${template.slug}`}
+                    href="/pricing"
                     className="flex-1 text-center py-2 bg-bee-yellow text-dark-charcoal rounded-lg hover:bg-yellow-400 transition-colors duration-200 font-semibold"
                   >
-                    {template.isPremium ? 'Buy Now' : 'Get Free'}
+                    Get Quote
                   </Link>
                 </div>
               </div>

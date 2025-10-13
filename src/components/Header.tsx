@@ -74,6 +74,12 @@ export default function Header() {
             >
               About
             </Link>
+            <Link 
+              href="/contact" 
+              className="text-foreground hover:text-bee-yellow transition-colors duration-200 font-medium"
+            >
+              Contact
+            </Link>
           </div>
 
           {/* Right side actions */}
@@ -145,6 +151,13 @@ export default function Header() {
                 onClick={() => setIsMenuOpen(false)}
               >
                 About
+              </Link>
+              <Link 
+                href="/contact" 
+                className="block text-foreground hover:text-bee-yellow transition-colors duration-200 font-medium py-2"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Contact
               </Link>
               <Link
                 href="/get-started"
