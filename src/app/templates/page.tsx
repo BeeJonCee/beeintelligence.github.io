@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import Header from "@/src/components/Header";
 import Footer from "@/src/components/Footer";
@@ -26,7 +26,7 @@ interface Template {
   tags: string[];
 }
 
-export default function TemplatesPage() {
+function TemplatesContent() {
   const [templates, setTemplates] = useState<Template[]>([]);
   const [loading, setLoading] = useState(true);
   const [pagination, setPagination] = useState({
@@ -375,5 +375,24 @@ export default function TemplatesPage() {
       </main>
       <Footer />
     </div>
+  );
+}
+
+export default function TemplatesPage() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen bg-background">
+        <Header />
+        <main className="pt-20">
+          <div className="container mx-auto px-4 py-20 text-center">
+            <div className="w-16 h-16 border-4 border-bee-yellow border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+            <p className="text-text-secondary">Loading templates...</p>
+          </div>
+        </main>
+        <Footer />
+      </div>
+    }>
+      <TemplatesContent />
+    </Suspense>
   );
 }
