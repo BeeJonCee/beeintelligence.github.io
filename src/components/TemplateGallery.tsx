@@ -34,124 +34,69 @@ export default function TemplateGallery() {
     selectedIndustry: 'all',
   });
 
-  // Mock data for now - will be replaced with API calls
-  const mockTemplates: Template[] = [
-    {
-      id: 1,
-      name: "Construction Pro",
-      slug: "construction-pro",
-      description: "Professional construction company template with modern design and booking system",
-      category: "business",
-      industry: "construction",
-      style: "modern",
-      layout: "single-page",
-      screenshotUrl: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?w=600&h=400&fit=crop",
-      previewUrl: "/preview/construction",
-      isPremium: false,
-      price: 0,
-      viewCount: 1250,
-      downloadCount: 89,
-      features: ["Responsive", "Booking System", "Gallery", "Contact Form"],
-      tags: ["construction", "business", "modern", "booking"]
-    },
-    {
-      id: 2,
-      name: "Restaurant Elegant",
-      slug: "restaurant-elegant",
-      description: "Elegant restaurant template with menu showcase and reservation system",
-      category: "business",
-      industry: "restaurant",
-      style: "elegant",
-      layout: "multi-page",
-      screenshotUrl: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=600&h=400&fit=crop",
-      previewUrl: "/preview/restaurant",
-      isPremium: true,
-      price: 49,
-      viewCount: 2100,
-      downloadCount: 156,
-      features: ["Menu Showcase", "Reservations", "Gallery", "Reviews"],
-      tags: ["restaurant", "food", "elegant", "menu"]
-    },
-    {
-      id: 3,
-      name: "Tech Startup",
-      slug: "tech-startup",
-      description: "Modern tech startup template with clean design and feature highlights",
-      category: "business",
-      industry: "technology",
-      style: "minimal",
-      layout: "single-page",
-      screenshotUrl: "https://images.unsplash.com/photo-1551650975-87deedd944c3?w=600&h=400&fit=crop",
-      previewUrl: "/preview/tech-startup",
-      isPremium: false,
-      price: 0,
-      viewCount: 3200,
-      downloadCount: 234,
-      features: ["Clean Design", "Feature Showcase", "Team Section", "Contact"],
-      tags: ["tech", "startup", "minimal", "modern"]
-    },
-    {
-      id: 4,
-      name: "Fashion Store",
-      slug: "fashion-store",
-      description: "Stylish fashion e-commerce template with product showcase",
-      category: "ecommerce",
-      industry: "fashion",
-      style: "stylish",
-      layout: "multi-page",
-      screenshotUrl: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=600&h=400&fit=crop",
-      previewUrl: "/preview/fashion-store",
-      isPremium: true,
-      price: 79,
-      viewCount: 1800,
-      downloadCount: 98,
-      features: ["Product Showcase", "Shopping Cart", "Checkout", "Reviews"],
-      tags: ["fashion", "ecommerce", "stylish", "products"]
-    },
-    {
-      id: 5,
-      name: "Portfolio Creative",
-      slug: "portfolio-creative",
-      description: "Creative portfolio template for designers and artists",
-      category: "portfolio",
-      industry: "creative",
-      style: "creative",
-      layout: "single-page",
-      screenshotUrl: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&h=400&fit=crop",
-      previewUrl: "/preview/portfolio-creative",
-      isPremium: false,
-      price: 0,
-      viewCount: 2800,
-      downloadCount: 187,
-      features: ["Portfolio Gallery", "About Section", "Contact", "Blog"],
-      tags: ["portfolio", "creative", "design", "art"]
-    },
-    {
-      id: 6,
-      name: "Medical Clinic",
-      slug: "medical-clinic",
-      description: "Professional medical clinic template with appointment booking",
-      category: "business",
-      industry: "healthcare",
-      style: "professional",
-      layout: "multi-page",
-      screenshotUrl: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1f?w=600&h=400&fit=crop",
-      previewUrl: "/preview/medical-clinic",
-      isPremium: true,
-      price: 59,
-      viewCount: 1500,
-      downloadCount: 76,
-      features: ["Appointment Booking", "Services", "Team", "Contact"],
-      tags: ["medical", "healthcare", "professional", "booking"]
-    }
-  ];
+  // Fetch templates from API
+  const fetchTemplates = useCallback(async () => {
+    try {
+      setState(prev => ({ ...prev, loading: true, error: null }));
+      const filters = {
+        page: state.currentPage,
+        limit: TEMPLATES_PER_PAGE,
+        ...(state.selectedCategory !== 'all' && { category: state.selectedCategory }),
+        ...(state.selectedIndustry !== 'all' && { industry: state.selectedIndustry }),
+      };
 
+      const response = await getTemplates(filters);
+      setState(prev => ({
+        ...prev,
+        templates: response.data,
+        totalPages: response.pagination.totalPages,
+        loading: false,
+      }));
+    } catch (error) {
+      const apiError = error instanceof ApiError ? error : new ApiError(500, 'Failed to fetch templates');
+      setState(prev => ({
+        ...prev,
+        error: apiError,
+        loading: false,
+      }));
+    }
+  }, [state.currentPage, state.selectedCategory, state.selectedIndustry]);
+
+  // Load templates on mount and when filters change
+  useEffect(() => {
+    fetchTemplates();
+  }, [fetchTemplates]);
+
+  // Handle category filter change
+  const handleCategoryChange = useCallback((e: React.ChangeEvent<HTMLSelectElement>) => {
+    setState(prev => ({
+      ...prev,
+      selectedCategory: e.target.value,
+      currentPage: 1, // Reset to first page
+    }));
+  }, []);
+
+  // Handle industry filter change
+  const handleIndustryChange = useCallback((e: React.ChangeEvent<HTMLSelectElement>) => {
+    setState(prev => ({
+      ...prev,
+      selectedIndustry: e.target.value,
+      currentPage: 1, // Reset to first page
+    }));
+  }, []);
+
+  // Handle pagination
+  const handlePageChange = useCallback((newPage: number) => {
+    setState(prev => ({ ...prev, currentPage: newPage }));
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, []);
+
+  // Get available categories and industries from templates
   const categories = [
     { value: 'all', label: 'All Categories' },
     { value: 'business', label: 'Business' },
     { value: 'ecommerce', label: 'E-commerce' },
     { value: 'portfolio', label: 'Portfolio' },
-    { value: 'blog', label: 'Blog' }
   ];
 
   const industries = [
@@ -161,40 +106,10 @@ export default function TemplateGallery() {
     { value: 'technology', label: 'Technology' },
     { value: 'fashion', label: 'Fashion' },
     { value: 'creative', label: 'Creative' },
-    { value: 'healthcare', label: 'Healthcare' }
+    { value: 'healthcare', label: 'Healthcare' },
   ];
 
-  useEffect(() => {
-    // Fetch templates from API
-    const fetchTemplates = async () => {
-      try {
-        const response = await fetch('http://localhost:3001/api/templates');
-        if (response.ok) {
-          const data = await response.json();
-          setTemplates(data.templates);
-        } else {
-          // Fallback to mock data
-          setTemplates(mockTemplates);
-        }
-      } catch (error) {
-        console.error('Error fetching templates:', error);
-        // Fallback to mock data
-        setTemplates(mockTemplates);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchTemplates();
-  }, []);
-
-  const filteredTemplates = templates.filter(template => {
-    const categoryMatch = selectedCategory === 'all' || template.category === selectedCategory;
-    const industryMatch = selectedIndustry === 'all' || template.industry === selectedIndustry;
-    return categoryMatch && industryMatch;
-  });
-
-  if (loading) {
+  if (state.loading) {
     return (
       <section className="py-20 bg-card-background">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -206,17 +121,34 @@ export default function TemplateGallery() {
               Discover our collection of professionally designed website templates
             </p>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-            {[...Array(6)].map((_, i) => (
-              <div key={i} className="bg-background rounded-xl p-6 animate-pulse">
-                <div className="w-full h-48 bg-accent-grey rounded-lg mb-4"></div>
-                <div className="h-4 bg-accent-grey rounded mb-2"></div>
-                <div className="h-3 bg-accent-grey rounded w-3/4"></div>
-              </div>
-            ))}
-          </div>
+          <TemplateGallerySkeleton count={TEMPLATES_PER_PAGE} />
         </div>
       </section>
+    );
+  }
+
+  if (state.error) {
+    return (
+      <ApiErrorBoundary onError={fetchTemplates}>
+        <section className="py-20 bg-card-background">
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <div className="bg-red-50 dark:bg-red-900/20 p-8 rounded-lg">
+              <h3 className="text-xl font-semibold text-red-600 dark:text-red-400 mb-2">
+                Unable to Load Templates
+              </h3>
+              <p className="text-red-500 dark:text-red-300 mb-4">
+                {state.error.message}
+              </p>
+              <button
+                onClick={fetchTemplates}
+                className="px-4 py-2 bg-bee-yellow text-dark-charcoal rounded-lg hover:bg-yellow-400 transition-colors duration-200 font-semibold"
+              >
+                Try Again
+              </button>
+            </div>
+          </div>
+        </section>
+      </ApiErrorBoundary>
     );
   }
 
@@ -237,8 +169,8 @@ export default function TemplateGallery() {
         {/* Filters */}
         <div className="flex flex-col sm:flex-row gap-4 mb-12 justify-center">
           <select
-            value={selectedCategory}
-            onChange={(e) => setSelectedCategory(e.target.value)}
+            value={state.selectedCategory}
+            onChange={handleCategoryChange}
             className="px-4 py-2 bg-background border border-border rounded-lg text-foreground focus:outline-none focus:ring-2 focus:ring-bee-yellow"
           >
             {categories.map(category => (
@@ -249,8 +181,8 @@ export default function TemplateGallery() {
           </select>
           
           <select
-            value={selectedIndustry}
-            onChange={(e) => setSelectedIndustry(e.target.value)}
+            value={state.selectedIndustry}
+            onChange={handleIndustryChange}
             className="px-4 py-2 bg-background border border-border rounded-lg text-foreground focus:outline-none focus:ring-2 focus:ring-bee-yellow"
           >
             {industries.map(industry => (
@@ -263,101 +195,109 @@ export default function TemplateGallery() {
 
         {/* Templates Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
-          {filteredTemplates.map((template) => (
-            <div key={template.id} className="bg-background rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 group">
-              {/* Template Image */}
-              <div className="relative overflow-hidden">
-                <Image
-                  src={template.screenshotUrl}
-                  alt={template.name}
-                  width={600}
-                  height={400}
-                  className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
-                />
-                {template.isPremium && (
-                  <div className="absolute top-4 right-4 bg-bee-yellow text-dark-charcoal px-2 py-1 rounded-full text-xs font-semibold">
-                    Premium
+          {state.templates.length > 0 ? (
+            state.templates.map((template: Template) => (
+              <div key={template.id} className="bg-background rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 group">
+                {/* Template Image */}
+                <div className="relative overflow-hidden">
+                  <Image
+                    src={template.screenshotUrl || getPlaceholderImageUrl(600, 400, template.name)}
+                    alt={template.name}
+                    width={600}
+                    height={400}
+                    className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
+                  />
+                  {template.isPremium && (
+                    <div className="absolute top-4 right-4 bg-bee-yellow text-dark-charcoal px-2 py-1 rounded-full text-xs font-semibold">
+                      Premium
+                    </div>
+                  )}
+                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300 flex items-center justify-center">
+                    <Link
+                      href={`/templates/${template.slug}`}
+                      onClick={() => incrementTemplateViews(template.id).catch(() => {})}
+                      className="opacity-0 group-hover:opacity-100 bg-bee-yellow text-dark-charcoal px-6 py-2 rounded-lg font-semibold transition-all duration-300 transform translate-y-4 group-hover:translate-y-0"
+                    >
+                      Preview
+                    </Link>
                   </div>
-                )}
-                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300 flex items-center justify-center">
-                  <Link
-                    href={template.previewUrl}
-                    className="opacity-0 group-hover:opacity-100 bg-bee-yellow text-dark-charcoal px-6 py-2 rounded-lg font-semibold transition-all duration-300 transform translate-y-4 group-hover:translate-y-0"
-                  >
-                    Preview
-                  </Link>
-                </div>
-              </div>
-
-              {/* Template Info */}
-              <div className="p-6">
-                <div className="flex items-center justify-between mb-2">
-                  <h3 className="text-xl font-semibold text-foreground">{template.name}</h3>
-                  {template.isPremium ? (
-                    <span className="text-bee-yellow font-bold">${template.price}</span>
-                  ) : (
-                    <span className="text-green-500 font-bold">Free</span>
-                  )}
-                </div>
-                
-                <p className="text-text-secondary mb-4 line-clamp-2">{template.description}</p>
-                
-                {/* Features */}
-                <div className="flex flex-wrap gap-2 mb-4">
-                  {template.features.slice(0, 3).map((feature, index) => (
-                    <span key={index} className="px-2 py-1 bg-accent-grey text-text-secondary text-xs rounded-full">
-                      {feature}
-                    </span>
-                  ))}
-                  {template.features.length > 3 && (
-                    <span className="px-2 py-1 bg-accent-grey text-text-secondary text-xs rounded-full">
-                      +{template.features.length - 3} more
-                    </span>
-                  )}
                 </div>
 
                 {/* Template Info */}
-                <div className="flex items-center justify-between text-sm text-text-muted mb-4">
-                  <span className="px-2 py-1 bg-accent-grey rounded-full text-xs">
-                    {template.category}
-                  </span>
-                  <span className="px-2 py-1 bg-accent-grey rounded-full text-xs">
-                    {template.industry}
-                  </span>
-                </div>
+                <div className="p-6">
+                  <div className="flex items-center justify-between mb-2">
+                    <h3 className="text-xl font-semibold text-foreground">{template.name}</h3>
+                    {template.isPremium ? (
+                      <span className="text-bee-yellow font-bold">{formatPrice(template.price)}</span>
+                    ) : (
+                      <span className="text-green-500 font-bold">Free</span>
+                    )}
+                  </div>
+                  
+                  <p className="text-text-secondary mb-4 line-clamp-2">{template.description}</p>
+                  
+                  {/* Stats */}
+                  <div className="flex items-center justify-between text-sm text-text-muted mb-4">
+                    <span className="flex items-center gap-1">
+                      <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M15 8a3 3 0 11-6 0 3 3 0 016 0z" />
+                        <path fillRule="evenodd" d="M12.316 3.051a1 1 0 01.633 1.265l-4 12a1 1 0 11-1.898-.632l4-12a1 1 0 011.265-.633z" clipRule="evenodd" />
+                      </svg>
+                      {formatCount(template.viewCount)}
+                    </span>
+                    <span className="flex items-center gap-1">
+                      <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.657 6.243A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4z" />
+                      </svg>
+                      {formatCount(template.downloadCount)}
+                    </span>
+                  </div>
 
-                {/* Actions */}
-                <div className="flex gap-2">
-                  <Link
-                    href={template.previewUrl}
-                    className="flex-1 text-center py-2 border border-bee-yellow text-bee-yellow rounded-lg hover:bg-bee-yellow hover:text-dark-charcoal transition-colors duration-200"
-                  >
-                    Preview
-                  </Link>
-                  <Link
-                    href="/pricing"
-                    className="flex-1 text-center py-2 bg-bee-yellow text-dark-charcoal rounded-lg hover:bg-yellow-400 transition-colors duration-200 font-semibold"
-                  >
-                    Get Quote
-                  </Link>
+                  {/* Category & Industry Tags */}
+                  <div className="flex flex-wrap gap-2 mb-4">
+                    <span className="px-2 py-1 bg-accent-grey text-text-secondary text-xs rounded-full">
+                      {template.category}
+                    </span>
+                    <span className="px-2 py-1 bg-accent-grey text-text-secondary text-xs rounded-full">
+                      {template.industry}
+                    </span>
+                  </div>
+
+                  {/* Actions */}
+                  <div className="flex gap-2">
+                    <Link
+                      href={`/templates/${template.slug}`}
+                      onClick={() => incrementTemplateViews(template.id).catch(() => {})}
+                      className="flex-1 text-center py-2 border border-bee-yellow text-bee-yellow rounded-lg hover:bg-bee-yellow hover:text-dark-charcoal transition-colors duration-200"
+                    >
+                      Preview
+                    </Link>
+                    <Link
+                      href="/pricing"
+                      className="flex-1 text-center py-2 bg-bee-yellow text-dark-charcoal rounded-lg hover:bg-yellow-400 transition-colors duration-200 font-semibold"
+                    >
+                      Get Quote
+                    </Link>
+                  </div>
                 </div>
               </div>
+            ))
+          ) : (
+            <div className="col-span-full text-center py-12">
+              <p className="text-text-secondary text-lg">No templates found matching your filters.</p>
             </div>
-          ))}
+          )}
         </div>
 
-        {/* View All Button */}
-        <div className="text-center">
-          <Link
-            href="/templates"
-            className="inline-flex items-center px-8 py-3 bg-bee-yellow text-dark-charcoal font-semibold rounded-lg hover:bg-yellow-400 transition-colors duration-200 bee-shadow"
-          >
-            View All Templates
-            <svg className="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-            </svg>
-          </Link>
-        </div>
+        {/* Pagination */}
+        {state.totalPages > 1 && (
+          <Pagination
+            currentPage={state.currentPage}
+            totalPages={state.totalPages}
+            onPageChange={handlePageChange}
+            loading={state.loading}
+          />
+        )}
       </div>
     </section>
   );
