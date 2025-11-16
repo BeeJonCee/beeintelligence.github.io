@@ -1,33 +1,38 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { getTemplates, ApiError, incrementTemplateViews } from '../lib/api';
+import { Pagination } from './Pagination';
+import { TemplateGallerySkeleton } from './SkeletonLoader';
+import { ApiErrorBoundary } from './ErrorBoundary';
+import { formatCount, formatPrice, getPlaceholderImageUrl } from '../lib/utils';
+import type { Template, PaginatedResponse } from '../../../shared/types/index.js';
 
-interface Template {
-  id: number;
-  name: string;
-  slug: string;
-  description: string;
-  category: string;
-  industry: string;
-  style: string;
-  layout: string;
-  screenshotUrl: string;
-  previewUrl: string;
-  isPremium: boolean;
-  price: number;
-  viewCount: number;
-  downloadCount: number;
-  features: string[];
-  tags: string[];
+interface TemplateGalleryState {
+  templates: Template[];
+  loading: boolean;
+  error: ApiError | null;
+  currentPage: number;
+  totalPages: number;
+  selectedCategory: string;
+  selectedIndustry: string;
 }
 
+const TEMPLATES_PER_PAGE = 6;
+const PAGINATION_TIMEOUT = 300; // ms
+
 export default function TemplateGallery() {
-  const [templates, setTemplates] = useState<Template[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [selectedCategory, setSelectedCategory] = useState('all');
-  const [selectedIndustry, setSelectedIndustry] = useState('all');
+  const [state, setState] = useState<TemplateGalleryState>({
+    templates: [],
+    loading: true,
+    error: null,
+    currentPage: 1,
+    totalPages: 1,
+    selectedCategory: 'all',
+    selectedIndustry: 'all',
+  });
 
   // Mock data for now - will be replaced with API calls
   const mockTemplates: Template[] = [
