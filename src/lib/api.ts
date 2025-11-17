@@ -14,7 +14,7 @@ import type {
 
 // API Configuration
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001/api';
-const API_TIMEOUT = 10000; // 10 seconds
+const API_TIMEOUT = 30000; // 30 seconds (increased to handle slow database queries)
 
 /**
  * Custom error class for API errors

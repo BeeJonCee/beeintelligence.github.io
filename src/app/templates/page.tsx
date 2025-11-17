@@ -64,7 +64,7 @@ function TemplatesContent() {
         const response = await fetch(`http://localhost:3001/api/templates?${params.toString()}`);
         if (response.ok) {
           const data = await response.json();
-          setTemplates(data.templates);
+          setTemplates(data.data || []);
           setPagination(data.pagination);
         } else {
           // Fallback to mock data
@@ -200,7 +200,7 @@ function TemplatesContent() {
               </div>
             </div>
 
-            {templates.length === 0 ? (
+            {!templates || templates.length === 0 ? (
               <div className="text-center py-20">
                 <div className="text-6xl mb-4">🔍</div>
                 <h3 className="text-2xl font-bold text-foreground mb-2">No templates found</h3>
@@ -218,13 +218,19 @@ function TemplatesContent() {
                   <div key={template.id} className="bg-card-background rounded-xl overflow-hidden border border-border hover:border-bee-yellow transition-all duration-300 group hover:shadow-lg">
                     {/* Template Image */}
                     <div className="relative overflow-hidden">
-                      <Image
-                        src={template.screenshotUrl}
-                        alt={template.name}
-                        width={600}
-                        height={400}
-                        className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
-                      />
+                      {template.screenshotUrl ? (
+                        <Image
+                          src={template.screenshotUrl}
+                          alt={template.name}
+                          width={600}
+                          height={400}
+                          className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
+                        />
+                      ) : (
+                        <div className="w-full h-48 bg-gradient-to-br from-bee-yellow/20 to-purple-500/20 flex items-center justify-center">
+                          <span className="text-4xl">🎨</span>
+                        </div>
+                      )}
                       {template.isPremium && (
                         <div className="absolute top-4 right-4 bg-bee-yellow text-dark-charcoal px-3 py-1 rounded-full text-sm font-semibold">
                           Premium

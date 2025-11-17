@@ -1,70 +1,66 @@
+'use client';
+
+import { useState, useEffect } from 'react';
 import Header from "@/src/components/Header";
 import Footer from "@/src/components/Footer";
 import Link from "next/link";
+import { getCategories, getIndustries } from '@/src/lib/api';
+import { CategorySkeleton } from '@/src/components/SkeletonLoader';
+import type { Category, Industry } from '../../../../shared/types/index';
+
+// Icon map for categories and industries
+const iconMap: { [key: string]: string } = {
+  'business': '🏢',
+  'ecommerce': '🛒',
+  'portfolio': '🎨',
+  'blog': '📝',
+  'restaurant': '🍽️',
+  'healthcare': '🏥',
+  'construction': '🏗️',
+  'technology': '💻',
+  'fashion': '�',
+  'creative': '🎨',
+  'education': '🎓',
+  'real-estate': '🏠',
+  'fitness': '💪',
+  'legal': '⚖️',
+  'travel': '✈️',
+  'finance': '💰'
+};
 
 export default function Categories() {
-  const categories = [
-    {
-      id: 1,
-      name: "Business",
-      slug: "business",
-      description: "Professional business templates for companies, agencies, and service providers",
-      icon: "🏢",
-      color: "#FFD600",
-      templateCount: 15,
-      featured: true
-    },
-    {
-      id: 2,
-      name: "E-commerce",
-      slug: "ecommerce",
-      description: "Online store templates with shopping cart and payment integration",
-      icon: "🛒",
-      color: "#FFD600",
-      templateCount: 8,
-      featured: true
-    },
-    {
-      id: 3,
-      name: "Portfolio",
-      slug: "portfolio",
-      description: "Creative portfolio templates for designers, artists, and professionals",
-      icon: "🎨",
-      color: "#FFD600",
-      templateCount: 12,
-      featured: true
-    },
-    {
-      id: 4,
-      name: "Blog",
-      slug: "blog",
-      description: "Content-focused templates for bloggers and content creators",
-      icon: "📝",
-      color: "#FFD600",
-      templateCount: 6,
-      featured: false
-    },
-    {
-      id: 5,
-      name: "Restaurant",
-      slug: "restaurant",
-      description: "Food service templates with menu showcase and reservation systems",
-      icon: "🍽️",
-      color: "#FFD600",
-      templateCount: 5,
-      featured: false
-    },
-    {
-      id: 6,
-      name: "Healthcare",
-      slug: "healthcare",
-      description: "Medical and healthcare templates with appointment booking",
-      icon: "🏥",
-      color: "#FFD600",
-      templateCount: 4,
-      featured: false
-    }
-  ];
+  const [categories, setCategories] = useState<Category[]>([]);
+  const [industries, setIndustries] = useState<Industry[]>([]);
+  const [loadingCategories, setLoadingCategories] = useState(true);
+  const [loadingIndustries, setLoadingIndustries] = useState(true);
+  const [error, setError] = useState('');
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        // Fetch categories
+        const categoriesResult = await getCategories();
+        if (Array.isArray(categoriesResult)) {
+          setCategories(categoriesResult.slice(0, 6)); // Limit to 6 featured
+        }
+        setLoadingCategories(false);
+
+        // Fetch industries
+        const industriesResult = await getIndustries();
+        if (Array.isArray(industriesResult)) {
+          setIndustries(industriesResult);
+        }
+        setLoadingIndustries(false);
+      } catch (err) {
+        console.error('Error fetching categories/industries:', err);
+        setError('Failed to load categories and industries');
+        setLoadingCategories(false);
+        setLoadingIndustries(false);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   return (
     <div className="min-h-screen bg-background">
@@ -95,22 +91,10 @@ export default function Categories() {
                   <div className="bg-card-background rounded-xl p-8 border border-border hover:border-bee-yellow transition-all duration-300 group-hover:shadow-lg group-hover:transform group-hover:scale-105">
                     <div className="text-center mb-6">
                       <div className="w-16 h-16 bg-bee-yellow rounded-full flex items-center justify-center mx-auto mb-4 text-2xl">
-                        {category.icon}
+                        {iconMap[category.slug.toLowerCase()] || '📦'}
                       </div>
                       <h3 className="text-2xl font-bold text-foreground mb-2">{category.name}</h3>
-                      <p className="text-text-secondary leading-relaxed">{category.description}</p>
-                    </div>
-                    
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center">
-                        <span className="text-bee-yellow font-semibold">{category.templateCount}</span>
-                        <span className="text-text-secondary ml-1">templates</span>
-                      </div>
-                      {category.featured && (
-                        <span className="px-3 py-1 bg-bee-yellow/20 text-bee-yellow text-sm rounded-full">
-                          Featured
-                        </span>
-                      )}
+                      <p className="text-text-secondary leading-relaxed">{category.description || 'No description available'}</p>
                     </div>
                     
                     <div className="mt-4 flex items-center text-bee-yellow group-hover:text-yellow-400 transition-colors duration-200">
@@ -159,7 +143,7 @@ export default function Categories() {
                   className="group block"
                 >
                   <div className="bg-background rounded-lg p-6 text-center border border-border hover:border-bee-yellow transition-all duration-200 group-hover:shadow-md">
-                    <div className="text-3xl mb-3">{industry.icon}</div>
+                    <div className="text-3xl mb-3">{industry.icon || iconMap[industry.slug.toLowerCase()] || '🏢'}</div>
                     <h4 className="font-semibold text-foreground text-sm group-hover:text-bee-yellow transition-colors duration-200">
                       {industry.name}
                     </h4>
